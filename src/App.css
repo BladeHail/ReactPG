@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+#writing-place > * {
+  display: flexbox;
+  flex-direction: row;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -39,4 +44,9 @@
 
 .read-the-docs {
   color: #888;
+}
+
+
+textarea {
+  resize: none;
 }

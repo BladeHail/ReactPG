@@ -5,17 +5,20 @@ import './App.css'
 
 const WritingPlace = () => {
     return(
-    <>
-        <label htmlFor="title">
-            <input name="title" type="text"></input>
+    <div id="writing-place">
+        <label htmlFor="title" className="input-field">
+            <input id="title" type="text"></input>
         </label>
-        <label htmlFor="content">
-            <textarea name="content" placeholder="content"></textarea>
+        <label htmlFor="content" className="input-field">
+            <textarea id="content" placeholder="content"></textarea>
         </label>
-        <label htmlFor="password">
-            <input name="password" type="text"></input>
+        <label htmlFor="password" className="input-field">
+            <input id="password" type="text"></input>
         </label>
-    </>
+        <label htmlFor="submit-button" className="input-field">
+            <input id="submit-button" type="submit" formMethod='post' value=""></input>
+        </label>
+    </div>
 );}
 
 function App() {
@@ -40,9 +43,7 @@ function App() {
             Edit <code>src/App.tsx</code> and save to test HMR
         </p>
         </div>
-        <p className="read-the-docs">
         <WritingPlace />
-        </p>
     </>
     )
 }
