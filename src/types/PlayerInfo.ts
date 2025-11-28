@@ -1,8 +1,5 @@
-import PlayerGrid from "../components/playerList/PlayerGrid";
-import type { Player } from "../types/Player";
-
-export default function PlayerListPage() {
-  const playerone : Player = {
+import {type Player} from "../types/Player"
+const playerone : Player = {
     id : 0,
     name : "Me",
     body : "201cm 120kg",
@@ -38,9 +35,4 @@ export default function PlayerListPage() {
     media : "",
     awards : ["2024 금메달", "2020 금메달", "2016 동메달"]
   }
-  return (
-    <div className="w-full max-w-5xl mx-auto p-4 lg:p-6">
-      <PlayerGrid Players={[playerone, playertwo, playersam, playernet]} />
-    </div>
-  );
-}
+export const PlayerInfo : Player[] = [playerone, playertwo, playersam, playernet]

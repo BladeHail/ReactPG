@@ -1,21 +1,14 @@
 import ProfileHeader from "../components/profile/ProfileHeader";
 import ProfileSections from "../components/profile/ProfileSections";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { fetchPlayerById } from "../api/PlayerApi";
+import { useState } from "react";
 import { type Player } from "../types/Player";
+import { PlayerInfo } from "../types/PlayerInfo";
 
-export default function ProfilePage() {
-  const { id } = useParams();
+export default function ProfilePage({id} : {id : number}) {
   const [player, setPlayer] = useState<Player | null>(null);
 
-  useEffect(() => {
-    if (id) {
-      fetchPlayerById(Number(id)).then(setPlayer);
-    }
-  }, [id]);
-
   if (!player) {
+    setTimeout(() => {setPlayer(PlayerInfo[id])}, 1000);
     return <div className="p-6">불러오는 중...</div>;
   }
   return (

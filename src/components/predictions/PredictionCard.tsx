@@ -6,23 +6,6 @@ export default function PredictionCard({ match }: { match: MatchDto }) {
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(match.alreadyPredicted);
 
-  const handlePredict = async ( result : "HOME_WIN" | "AWAY_WIN") => {
-    if (loading) return;
-    setLoading(true);
-    try {
-      await api.post("/predictions", {
-      matchId: match.id,
-      predictedResult: result,
-    });
-      setDone(true);
-    } catch (e : any) {
-      console.error(e);
-      alert("예측 실패: " + e.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="card bg-base-100 shadow-lg p-5 border border-base-300 mt-4">
       <h1 className="text-2xl font-bold">{match.teamA} vs. {match.teamB}</h1>
@@ -46,14 +29,14 @@ export default function PredictionCard({ match }: { match: MatchDto }) {
               <button
                 className="btn btn-primary bg-base-200 btn-outline w-full"
                 disabled={loading}
-                onClick={() => handlePredict("HOME_WIN")}
+                onClick={() => setDone(true)}
               >
                 홈팀 승리
               </button>
               <button
                 className="btn btn-primary bg-base-200 btn-outline w-full"
                 disabled={loading}
-                onClick={() => handlePredict("AWAY_WIN")}
+                onClick={() => setDone(true)}
               >
                 어웨이 승리
               </button>

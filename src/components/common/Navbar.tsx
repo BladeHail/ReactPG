@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
 import { Dropdown } from "./Dropdown";
 
 export function Navbar() {
-  const { isLoggedIn, username, logout } = useAuth();
   const navigate = useNavigate();
 
   return (
@@ -27,17 +25,14 @@ export function Navbar() {
 
       {/* 로그인 / 로그아웃 영역 */}
       <div className="flex-none gap-3">
-        {isLoggedIn && localStorage.getItem('token') ? (
+        {localStorage.getItem('token') ? (
           <>
-            <span className="font-semibold">{username}님 </span>
-            <button className="btn btn-sm" onClick={logout}>
-              로그아웃
-            </button>
+            <span className="font-semibold">{localStorage.getItem('username')} 님</span>
           </>
         ) : (
-          <button className="btn btn-sm" onClick={() => navigate("/login")}>
-            로그인
-          </button>
+          <>
+            <span className="font-semibold">Guest 님</span>
+          </>
         )}
       </div>
     </div>

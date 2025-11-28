@@ -1,19 +1,14 @@
-import { useEffect, useState } from "react";
-import { api } from "../api/axiosInstance";
+import {  useState } from "react";
 import PredictionCard from "../components/predictions/PredictionCard";
 import { type MatchDto } from "../types/MatchDto";
 
-export default function PredictionPage() {
-  const [matches, setMatches] = useState<MatchDto[]>([]);
+export default function PredictionPage( {matches} : {matches : MatchDto[]}) {
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    api.get("/predictions/matches")
-      .then((res) => setMatches(res.data))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) return <div className="p-6">불러오는 중...</div>;
+  if (loading) {
+    setTimeout(() => {setLoading(false)}, 1000);
+    return <div className="p-6">불러오는 중...</div>;
+  }
 
   return (
     <div className="w-full max-w-3xl bg-base-200 mx-auto p-4 space-y-4 rounded-xl">
