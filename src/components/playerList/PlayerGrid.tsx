@@ -1,15 +1,7 @@
-import { useState } from "react";
 import PlayerCard from "./PlayerCard";
-import { type Player } from "../../types/Player";
+import { type Player } from "../../types/Player"; // [중요] Player 타입을 여기서 가져와야 합니다.
 
-export default function PlayerGrid( {Players} : {Players : Player[]}) {
-  const [loading, setLoading] = useState(true);
-
-  if (loading) {
-    setTimeout(() => {setLoading(false)}, 1000);
-    return <div className="text-center text-base-content/60">불러오는 중...</div>;
-  }
-
+export default function PlayerGrid({ Players }: { Players: Player[] }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {Players.map((player) => (
@@ -19,6 +11,8 @@ export default function PlayerGrid( {Players} : {Players : Player[]}) {
           name={player.name}
           desc={player.type}
           media={player.media}
+          // [중요] PlayerCard에 age 값을 전달합니다.
+          age={player.age} 
         />
       ))}
     </div>
