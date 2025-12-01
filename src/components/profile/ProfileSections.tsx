@@ -1,32 +1,41 @@
-// src/components/profile/ProfileSections.tsx
+import { type Player } from "../../types/Player";
 
-import {type Player} from "../../types/Player"
-
-export default function ProfileSections({player}: {player : Player}) {
+export default function ProfileSections({ player }: { player: Player }) {
   return (
     <section className="space-y-6">
 
+      {/* 기본 정보 섹션 */}
       <div className="bg-base-200 rounded-xl shadow p-6">
-        {/* 섹션 제목: text-xl -> text-2xl로 변경 */}
         <h2 className="text-2xl font-semibold">기본 정보</h2>
         <div className="divider my-4"></div>
         
-        {/* 본문 내용: text-lg 추가 */}
-        <p className="text-lg text-base-content/70 mt-2">{player.body}</p>
         <p className="text-lg text-base-content/70">{player.team}</p>
-        <p className="text-base-content/70">{player.time}</p>
+        <p className="text-lg text-base-content/70">{player.time}</p>
       </div>
 
+      {/* 수상 경력 섹션 */}
       <div className="bg-base-200 rounded-xl shadow p-6">
-        {/* 섹션 제목: text-xl -> text-2xl로 변경 */}
         <h2 className="text-4xl font-semibold">수상 경력</h2>
         <div className="divider my-4"></div>
         
-        {/* 리스트 내용: text-lg 추가 */}
         <ul className="list-disc ml-6 mt-2 text-lg text-base-content/70">
-          {player.awards?.map((award, idx) => (
-            <li key={idx} className="mb-1">{award}</li>
-          ))}
+          {player.awards?.map((award, idx) => {
+            // [변수 분리] 조건 확인을 편하게 하기 위해 변수로 선언
+            const isDivider = award.trim().startsWith("─");
+            const isEmpty = award.trim() === "";
+            return (
+              <li 
+                key={idx} 
+                className={`
+                  mb-1 
+                  ${/* 빈 줄이거나 구분선이면 점(bullet) 제거 */ (isEmpty || isDivider) ? "list-none" : ""} 
+                  ${/* 구분선이면 크기 키우고(2xl), 굵게(bold), 위아래 여백 추가 */ isDivider ? "text-2xl font-bold text-base-content mt-6 mb-2" : ""}
+                `}
+              >
+                {award || <br />}
+              </li>
+            );
+          })}
         </ul>
       </div>
 

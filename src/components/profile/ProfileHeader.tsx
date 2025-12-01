@@ -1,34 +1,35 @@
-// src/components/profile/ProfileSections.tsx
+import { type Player } from "../../types/Player";
 
-import {type Player} from "../../types/Player"
-
-export default function ProfileSections({player}: {player : Player}) {
+export default function ProfileHeader({ player }: { player: Player }) {
   return (
-    <section className="space-y-6">
-
-      <div className="bg-base-200 rounded-xl shadow p-6">
-        {/* 섹션 제목: text-xl -> text-2xl로 변경 */}
-        <h2 className="text-2xl font-semibold">기본 정보</h2>
-        <div className="divider my-4"></div>
-        
-        {/* 본문 내용: text-lg 추가 */}
-        <p className="text-lg text-base-content/70 mt-2">{player.body}</p>
-        <p className="text-lg text-base-content/70">{player.team}</p>
+    <section className="bg-base-200 rounded-xl shadow p-8 flex flex-col items-center text-center">
+      {/* 프로필 이미지 영역 */}
+      <div className="avatar">
+        <div className="w-36 h-36 rounded-full ring ring-primary/30 ring-offset-base-100 ring-offset-2 overflow-hidden">
+          {player.media ? (
+            <img 
+              src={player.media} 
+              alt={player.name} 
+              className="w-full h-full object-cover object-top" 
+            />
+          ) : (
+            <div className="w-full h-full bg-base-300 flex items-center justify-center">
+              No Image
+            </div>
+          )}
+        </div>
       </div>
+      
+      {/* 이름 */}
+      <h1 className="text-4xl font-bold mt-4">{player.name}</h1>
+      
+      {/* 종목 */}
+      <p className="text-xl text-base-content/70 mt-2">{player.type}</p>
 
-      <div className="bg-base-200 rounded-xl shadow p-6">
-        {/* 섹션 제목: text-xl -> text-2xl로 변경 */}
-        <h2 className="text-2xl font-semibold">수상 경력</h2>
-        <div className="divider my-4"></div>
-        
-        {/* 리스트 내용: text-lg 추가 */}
-        <ul className="list-disc ml-6 mt-2 text-lg text-base-content/70">
-          {player.awards?.map((award, idx) => (
-            <li key={idx} className="mb-1">{award}</li>
-          ))}
-        </ul>
-      </div>
-
+      {/* 소속(국가) */}
+      <p className="text-lg text-base-content/60 mt-1">
+        {player.team}
+      </p>
     </section>
   );
 }
