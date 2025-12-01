@@ -1,23 +1,34 @@
-// src/components/Main/ProfileHeader.tsx
-import { type Player } from "../../types/Player";
-export default function ProfileHeader({ player }: { player: Player }) {
+// src/components/profile/ProfileSections.tsx
 
+import {type Player} from "../../types/Player"
+
+export default function ProfileSections({player}: {player : Player}) {
   return (
-    <section className="bg-base-200 rounded-xl shadow p-8 flex flex-col items-center text-center">
-      <div className="avatar">
-        <div className="w-36 rounded-full ring ring-primary/30 ring-offset-base-100">
-          <div className="w-20 h-20 rounded-full bg-base-300" />
-          {player.media && (
-            <img src={player.media} alt="avatar" />
-          )}
-        </div>
-      </div>
-      <h1 className="text-2xl font-bold mt-4">{player.name}</h1>
-      <p className="text-base-content/70">{player.type}</p>
+    <section className="space-y-6">
 
-      <p className="text-sm text-base-content/60 mt-1">
-        {player.team}
-      </p>
+      <div className="bg-base-200 rounded-xl shadow p-6">
+        {/* 섹션 제목: text-xl -> text-2xl로 변경 */}
+        <h2 className="text-2xl font-semibold">기본 정보</h2>
+        <div className="divider my-4"></div>
+        
+        {/* 본문 내용: text-lg 추가 */}
+        <p className="text-lg text-base-content/70 mt-2">{player.body}</p>
+        <p className="text-lg text-base-content/70">{player.team}</p>
+      </div>
+
+      <div className="bg-base-200 rounded-xl shadow p-6">
+        {/* 섹션 제목: text-xl -> text-2xl로 변경 */}
+        <h2 className="text-2xl font-semibold">수상 경력</h2>
+        <div className="divider my-4"></div>
+        
+        {/* 리스트 내용: text-lg 추가 */}
+        <ul className="list-disc ml-6 mt-2 text-lg text-base-content/70">
+          {player.awards?.map((award, idx) => (
+            <li key={idx} className="mb-1">{award}</li>
+          ))}
+        </ul>
+      </div>
+
     </section>
   );
 }

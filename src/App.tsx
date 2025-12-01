@@ -32,6 +32,7 @@ function App() {
               <Route path="/players/1" element={<ProfilePage id={1}/>} />
               <Route path="/players/2" element={<ProfilePage id={2}/>} />
               <Route path="/players/3" element={<ProfilePage id={3}/>} />
+              <Route path="/players/4" element={<ProfilePage id={4}/>} />
               <Route path="/register" element={<RegisterForm />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/predictions" element={<PredictionPage matches={[testmatches, testmatches, testmatches]} />} />
